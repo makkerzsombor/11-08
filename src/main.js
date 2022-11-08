@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let response = await fetch('users.json');
         let eredmeny = await response.json();
 
-        let termekLista = document.getElementById('adatok');
-        adatok.textContent = '';
+        let termekLista = document.getElementById('tablazat');
+        tablazat.textContent = '';
 
         // Sorrend
         let abc = eredmeny.users.sort(function(a, b){
@@ -57,20 +57,49 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Kiiratas
         for (let u of abc){
-            let li = document.createElement('li');
-            li.innerHTML = u.username + '&emsp;' + u.email + '&emsp;' + u.phone;
-            termekLista.appendChild(li);
+            let tr = document.createElement('tr');
+            let td1 = document.createElement('td');
+            let td2 = document.createElement('td');
+            let td3 = document.createElement('td');
+            td1.textContent = u.username;
+            td2.textContent = u.email;
+            td3.textContent = u.phone;
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+            termekLista.appendChild(tr);
         }
     });
 
     // feladat 3
     document.getElementById('harmadFel').addEventListener('click', async () => {
 
+        let response = await fetch('users.json');
+        let eredmeny = await response.json();
+
+        let termekLista = document.getElementById('sulyos');
+        sulyos.textContent = '';
+
+        let suly = document.getElementById('magassag').value;
+
+        // Kiiratas
+
+
     });
 
     // feladat 4
     document.getElementById('negyedFel').addEventListener('click', async () => {
 
+        let response = await fetch('users.json');
+        let eredmeny = await response.json();
+
+        let termekLista = document.getElementById('barna');
+        barna.textContent = '';
+
+        // filteres kiiratas
+        let tomb = eredmeny.users.filter(e => e.eyeColor == 'Brown');
+
+        barna.textContent = tomb.length;
     });
 
 });
