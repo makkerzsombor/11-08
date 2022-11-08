@@ -76,14 +76,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let response = await fetch('users.json');
         let eredmeny = await response.json();
-
-        let termekLista = document.getElementById('sulyos');
         sulyos.textContent = '';
 
         let suly = document.getElementById('magassag').value;
 
-        // Kiiratas
+        // Sorba rendezés
+        let magasak = eredmeny.users.filter(e => e.height >= suly);
+        let osszeg = 0;
 
+        magasak.forEach(element => {
+            osszeg += element.weight;
+        });
+
+        // Kiiratas
+        sulyos.textContent = osszeg;
 
     });
 
@@ -93,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let response = await fetch('users.json');
         let eredmeny = await response.json();
 
-        let termekLista = document.getElementById('barna');
         barna.textContent = '';
 
         // filteres kiiratas
